@@ -2,13 +2,13 @@ import { SearchForm } from "components/SearchForm";
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
-const filmId = 12;
+// const filmId = 12;
 //Тут робимо запит на бекенд для отримання списку фільмів по пошуку
 
 const Movies = () => {
-    const [movies, setMovies] = useState(null);
+    // const [movies, setMovies] = useState(null);
     const [searchQuery, setSerchQuery] = useState('')
-    const search = '/search/movie';
+    // const search = '/search/movie';
 
     const handleFormSubmit = searchQuery => {
         setSerchQuery(searchQuery);
