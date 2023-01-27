@@ -2,7 +2,7 @@ import axios from 'axios';
 import { BASE_URL, MY_KEY } from 'constants';
 
 const moviesApi = axios.create({
-    baseURL: { BASE_URL },
+    baseURL: BASE_URL,
 });
 
 export const getMovies = async (params = {}, purpose='') => {
