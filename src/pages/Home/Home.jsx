@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getMovies } from "services/movies.api";
-import { Link } from "react-router-dom";
+import { MoviesListItem } from "components/MoviesListItem";
 
 const Home = () => {
     // const [loading, setLoading] = useState(false);
@@ -24,9 +24,7 @@ const Home = () => {
             <h2>Trending today</h2>
             <ul>
                 {movies?.map(movie => (
-                    <li key={movie.id}>
-                        <Link>{movie.original_title}</Link>
-                    </li>
+                    <MoviesListItem key={movie.id} movie={movie}/>
                 ))}
             </ul> 
         </>
