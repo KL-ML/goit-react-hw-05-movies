@@ -1,6 +1,7 @@
+import { MoviesListItem } from "components/MoviesListItem";
 import { SearchForm } from "components/SearchForm";
 import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+
 import {getMovies} from '../../services/movies.api'
 
 const Movies = () => {
@@ -13,6 +14,9 @@ const Movies = () => {
   }
 
     useEffect(() => {
+        if (!searchQuery) {
+            return;
+        }
         const fetchData = async (params, purpose) => {
             // setLoading(true);
             try {
@@ -30,9 +34,7 @@ const Movies = () => {
             <SearchForm onSubmit={handleFormSubmit}/>
             <ul>
                 {movies?.map(movie => (
-                    <li key={movie.id}>
-                        <Link>{movie.original_title}</Link>
-                    </li>
+                    <MoviesListItem key={movie.id} movie={movie}/>
                 ))}
             </ul>
         </>
