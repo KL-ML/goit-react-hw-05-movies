@@ -1,41 +1,39 @@
 import { SearchForm } from "components/SearchForm";
 import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-
-// const filmId = 12;
-//Тут робимо запит на бекенд для отримання списку фільмів по пошуку
+import {getMovies} from '../../services/movies.api'
 
 const Movies = () => {
-    // const [movies, setMovies] = useState(null);
+    const [movies, setMovies] = useState(null);
     const [searchQuery, setSerchQuery] = useState('')
-    // const search = '/search/movie';
+    const search = '/search/movie';
 
     const handleFormSubmit = searchQuery => {
         setSerchQuery(searchQuery);
-        console.log('searchQuery:', searchQuery);
   }
 
     useEffect(() => {
-
-    })
+        const fetchData = async (params, purpose) => {
+            // setLoading(true);
+            try {
+                const data = await getMovies(params, purpose);
+                setMovies(data.results);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData({query: searchQuery}, search);
+    }, [searchQuery]);
    
     return (
         <>
             <SearchForm onSubmit={handleFormSubmit}/>
-            {/* <h2>Trending today</h2> */}
             <ul>
-                <li>
-                    <Link to="12">{searchQuery}</Link>
-                </li>
-                <li>Movie 2</li>
-                <li>Movie 3</li>
-                <li>Movie 4</li>
-                <li>Movie 5</li>
-                <li>Movie 6</li>
-                <li>Movie 7</li>
-                <li>Movie 8</li>
-                <li>Movie 9</li>
-                <li>Movie 10</li>
+                {movies?.map(movie => (
+                    <li key={movie.id}>
+                        <Link>{movie.original_title}</Link>
+                    </li>
+                ))}
             </ul>
         </>
     )
