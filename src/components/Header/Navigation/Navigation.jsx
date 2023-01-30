@@ -5,14 +5,14 @@ import css from './Navigation.module.css';
 const getActiveClassName = ({ isActive }) => {
     return isActive
         ? css.active
-        : css.btn;
+        : css.nav;
 };
 
 export const Navigation = () => {
     return (
-        <>
+        <div className={css.navThumb}>
             <NavLink className={getActiveClassName} to='/'>Home</NavLink>
             <NavLink className={getActiveClassName} to='/movies'>Movies</NavLink>
-        </>
+        </div>
     );
 }
