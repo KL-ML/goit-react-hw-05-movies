@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMovies } from "services/movies.api";
 import { MoviesListItem } from "components/MoviesListItem";
+import { toast } from "react-toastify";
 
 const Home = () => {
     // const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ const Home = () => {
                 const data = await getMovies(params, purpose);
                 setMovies(data.results);
             } catch (error) {
-                console.log(error);
+                toast.error(error);
             }
         };
         fetchData({}, trending);
