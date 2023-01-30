@@ -1,24 +1,21 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-export const SearchForm = ({onSubmit}) => {
-    const [value, setValue] = useState('');
+export const SearchForm = ({onSubmit, searchQueryUrl}) => {
+    const [value, setValue] = useState(searchQueryUrl);
 
     const handleInput = e => {
         setValue(e.target.value.toLowerCase());
-        console.log('value', e.target.value)
     }
 
     const handleSubmit = e => {
         e.preventDefault();
 
         if (value.trim() === '') {
-            console.log("Enter search value !");
-            // toast.error("Enter search value !");
+            toast.error("Enter search value !");
             return;
         }
-
         onSubmit(value);
-        setValue('');
     }
 
     return (
