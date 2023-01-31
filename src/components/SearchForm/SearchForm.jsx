@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import css from './SearchForm.module.css';
 
 export const SearchForm = ({onSubmit, searchQueryUrl}) => {
     const [value, setValue] = useState(searchQueryUrl);
@@ -28,8 +29,9 @@ export const SearchForm = ({onSubmit, searchQueryUrl}) => {
                 autoComplete="off"
                 autoFocus
                 placeholder="Search movies"
+                className={css.searchInput}
             />            
-            <button type="submit">Search</button>
+            <button className={css.searchBtn} type="submit">Search</button>
         </form>
     );
 }
