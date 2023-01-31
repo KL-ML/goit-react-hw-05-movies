@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import React, { useState, useEffect, Suspense } from "react";
+import { NavLink, Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { getMovies } from '../../services/movies.api';
 import css from './MovieDetails.module.css';
 import { toast } from "react-toastify";
 
-export const MovieDetails = () => {
+const getActiveLink = ({ isActive }) => {
+    return isActive
+        ? css.active
+        : css.addLinks;
+};
+
+const MovieDetails = () => {
 
     const [movie, setMovie] = useState({});
     const { movieId } = useParams();
@@ -13,7 +19,6 @@ export const MovieDetails = () => {
 
     useEffect(() => {
         const fetchData = async (params, purpose) => {
-            // setLoading(true);
             try {
                 const data = await getMovies(params, purpose);
                 setMovie(data);
@@ -37,7 +42,7 @@ export const MovieDetails = () => {
                                     ? `https://image.tmdb.org/t/p/w300${poster_path}`
                                     : `http://www.suryalaya.org/images/no_image.jpg`
                             }
-                                width={320}
+                                width={240}
                                 loading="lazy"
                                 alt="poster" />
                         </div>
@@ -59,20 +64,24 @@ export const MovieDetails = () => {
                     </div>
                     <div className={css.additionalInfo}>
                         <h4 className="additionalTitle">Additional information</h4>
-                        <ul>
+                        <ul className={css.addLinks}>
                             <li>
-                                <Link to="cast" state={{ from: location.state?.from }}>Cast</Link>
+                                <NavLink className={getActiveLink} to="cast" state={{ from: location.state?.from }}>Cast</NavLink>
                             </li>
                             <li>
-                                <Link to="reviews" state={{ from: location.state?.from }}>Reviews</Link>
+                                <NavLink className={getActiveLink} to="reviews" state={{ from: location.state?.from }}>Reviews</NavLink>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <Outlet />
+                        <Suspense fallback={<p>Loading...</p>}>
+                            <Outlet />
+                        </Suspense>
                     </div>
                 </>
             }
         </>
     );
 };
+
+export default MovieDetails;
