@@ -14,5 +14,23 @@
 }
 .additionalInfo {
     box-shadow: 0px 7px 7px -6px rgba(0, 0, 0, 0.12);
-    padding: 4px;
+    padding: 0 8px 8px 16px;
+}
+.addLinks {
+    display: flex;
+    gap: 16px;
+    list-style-type: none;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    color: #6a6a6a;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0;
+}
+.addLinks:hover {
+    color: #f95c5c;
+}
+
+.active {
+    composes: addLinks;
+    color: #f95c5c;
 }
