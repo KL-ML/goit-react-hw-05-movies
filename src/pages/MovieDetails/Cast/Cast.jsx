@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getMovies } from "services/movies.api";
 import { toast } from "react-toastify";
 
-export const Cast = () => {
+const Cast = () => {
    const [cast, setCast] = useState();
    const { movieId } = useParams();
    const purpose = `/movie/${movieId}/credits`;
@@ -42,8 +42,8 @@ export const Cast = () => {
             })
             }
          </ul>
-         
-
       </>
    );
 };
+
+export default Cast;
