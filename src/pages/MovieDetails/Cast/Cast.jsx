@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { getMovies } from "services/movies.api";
 import { toast } from "react-toastify";
+import css from './Cast.module.css';
 
 const Cast = () => {
    const [cast, setCast] = useState();
@@ -23,10 +24,12 @@ const Cast = () => {
 
    return (
       <>
-         <ul>
+         <ul className={css.castList}>
             {cast && cast.map(({ id, name, character, profile_path }) => {
                return (
-                  <li key={id}>
+                  <li
+                     className={css.castItem}
+                     key={id}>
                      <img src={
                         profile_path
                            ? `https://image.tmdb.org/t/p/w200${profile_path}`
@@ -34,9 +37,13 @@ const Cast = () => {
                      }
                         alt="actor"
                         loading="lazy"
-                        width={120} />
-                     <h3>{name}</h3>
-                     <p>Character: {character}</p>
+                        width={180}
+                        height={270}
+                     />
+                     <div className={css.castInfo}>
+                        <h3>{name}</h3>
+                        <p>Character: {character}</p>
+                     </div>
                   </li>
                )
             })
