@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovies } from "services/movies.api";
 import { toast } from "react-toastify";
+import css from './Reviews.module.css';
 
 const Reviews = () => {
     const [review, setReview] = useState('');
@@ -23,7 +24,7 @@ const Reviews = () => {
 
     return (
         <>
-            <ul>
+            <ul className={css.reviewList}>
                 {review && review.length > 0
                     ? review.map(({ author, content, id }) => (
                         <li key={id}>
