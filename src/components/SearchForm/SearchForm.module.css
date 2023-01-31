@@ -8,4 +8,5 @@
 .searchBtn {
     height: 30px;
     width: 80px;
+    border-radius: none;
 }
