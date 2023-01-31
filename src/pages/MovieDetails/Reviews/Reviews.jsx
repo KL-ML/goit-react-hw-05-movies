@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getMovies } from "services/movies.api";
 import { toast } from "react-toastify";
 
-export const Reviews = () => {
+const Reviews = () => {
     const [review, setReview] = useState('');
     const { movieId } = useParams();
     const purpose = `/movie/${movieId}/reviews`;
@@ -36,3 +36,5 @@ export const Reviews = () => {
         </>
     );
 };
+
+export default Reviews;
